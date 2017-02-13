@@ -1,9 +1,12 @@
 public class QueenBoard{
     private boolean[][] board;
     private int solutionCount;
-    
+    private int[] queens;
+
     public QueenBoard(int size){
+	//false -> queen
 	board = new boolean[size][size];
+	queens = new int[size];
     }
 
     /**
@@ -16,15 +19,22 @@ public class QueenBoard{
      *all n queens. Uses solveH
      */
     public boolean solve(){
-	for(int i = 0; i < board.length; i ++){
-	    if (!solveH(i)){
-		return false;
-	    }
-	}
+	clear();
+	return solveH(0);
     }
 
     private boolean solveH(int row){
-	for(int )
+	p(row);
+	for(int i = queens[row]; i < queens.length; i ++){
+	    clearRow(row);
+	    queens[row] = i;
+	    board[row][i] = false;
+	    if(isSafe(row, i) && row < queens.length - 1){
+		p(12312);
+		if (solveH(row + 1))
+		    return true;
+	    }
+	}
 	
 	return false;
     }
@@ -37,11 +47,12 @@ public class QueenBoard{
      */
 
     private boolean isSafe(int row, int col){
-	int col1 = col;
-	int col2 = col;
+	int col1 = col + 1;
+	int col2 = col - 1;
+	row --;
 	try{
 	    for(int i = row; i >= 0; i --){
-		if(board[row][col]){
+		if(!board[row][col]){
 		    return false;
 		}
 	    }
@@ -50,7 +61,7 @@ public class QueenBoard{
 	try{
 	    for(int i = row; i >= 0; i --){
 		col1--;
-		if(board[row][col1]){
+		if(!board[row][col1]){
 		    return false;
 		}
 	    }
@@ -59,7 +70,7 @@ public class QueenBoard{
 	try{
 	    for(int i = row; i >= 0; i --){
 		col1++;
-		if(board[row][col1]){
+		if(!board[row][col1]){
 		    return false;
 		}
 	    }
@@ -68,7 +79,7 @@ public class QueenBoard{
     }
 
     public int getSolutionCount(){
-	while (solveH(x)){
+	while (solveH(3)){
 	    
 	}
 
@@ -76,9 +87,14 @@ public class QueenBoard{
     }
 
 
+    public void clear(){
+	for(int i = 0; i <board.length; i++){
+	    clearRow(i);
+	}
+    }
     private void clearRow(int row){
-	for(int i = 0; i < board[0].length; ){
-	    board[row][i] = false;
+	for(int i = 0; i < board[0].length; i ++){
+	    board[row][i] = true;
 	}
     }
 
@@ -87,6 +103,29 @@ public class QueenBoard{
      *all others are displayed as underscores '_'
      */
     public String toString(){
-    	return "";
+	String ans = "";
+	for(    int row = 0; row < board.length; row ++){
+	    for(int col = 0; col < board.length; col ++){
+		if (board[row][col]){
+		    ans += " X";
+		}else{
+		    ans += " O";
+		}
+	    }
+	    ans += "\n";
+	}
+    	return ans;
+    }
+
+    public void p(String s){
+	System.out.println(s);
+    }
+    public void p(int i){
+	p(i + "");
+    }
+    public static void main(String[] args){
+	QueenBoard x = new QueenBoard(4);
+	x.solve();
+	x.p(x.toString());
     }
 }
