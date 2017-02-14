@@ -1,41 +1,35 @@
 public class QueenBoard{
     private boolean[][] board;
-    private int solutionCount;
+    private int count;
     private int[] queens;
 
     public QueenBoard(int size){
-	//false -> queen
+	//initializes all the variables
+        count = -1;
+	//used to help print the board
 	board = new boolean[size][size];
+	//used to keep track of queens (only one queen per row so this notation works)
 	queens = new int[size];
     }
 
-    /**
-     *precondition: board is filled with 0's only.
-     *@return false when the board is not solveable. true otherwise.
-     *postcondition: 
-     *if false: board is still filled with 0's
-     *if true: board is filled with the 
-     *final configuration of the board after adding 
-     *all n queens. Uses solveH
-     */
+    //looks for the first solution
     public boolean solve(){
-	clear();
-	return solveH(0);
+	boolean a = solveH(0);
+	update();
+	return a;
     }
 
     private boolean solveH(int row){
-	p(row);
-	for(int i = queens[row]; i < queens.length; i ++){
-	    clearRow(row);
-	    queens[row] = i;
-	    board[row][i] = false;
-	    if(isSafe(row, i) && row < queens.length - 1){
-		p(12312);
-		if (solveH(row + 1))
+	if(row == queens.length)
+	    return true;
+        for(;queens[row] < queens.length ; queens[row] = queens[row] + 1){
+	    clearR(row);
+	    if(isSafe(row)){
+		if( solveH(row + 1) )
 		    return true;
 	    }
 	}
-	
+	queens[row] -= 1;
 	return false;
     }
 
@@ -46,70 +40,81 @@ public class QueenBoard{
      *The board should be reset after this is run.    
      */
 
-    private boolean isSafe(int row, int col){
-	int col1 = col + 1;
-	int col2 = col - 1;
+    private boolean isSafe(int row){
+	int col  = queens[row]    ;
+	int col1 = queens[row] + 1;
+	int col2 = queens[row] - 1;
 	row --;
-	try{
-	    for(int i = row; i >= 0; i --){
-		if(!board[row][col]){
-		    return false;
-		}
+	
+	for(;row >= 0; row --){
+	    if(queens[row] == col || queens[row] == col1 || queens[row] == col2){
+		return false;
 	    }
-	}catch(IndexOutOfBoundsException e){}
-
-	try{
-	    for(int i = row; i >= 0; i --){
-		col1--;
-		if(!board[row][col1]){
-		    return false;
-		}
-	    }
-	}catch(IndexOutOfBoundsException e){}
-
-	try{
-	    for(int i = row; i >= 0; i --){
-		col1++;
-		if(!board[row][col1]){
-		    return false;
-		}
-	    }
-	}catch(IndexOutOfBoundsException e){}
+	    col1 ++;
+	    col2 --;
+	}
+	
 	return true;
     }
 
+    private void push(){
+	if(solve()){
+	    count ++;
+	}
+	queens[queens.length - 1] += 1;
+	push();
+    }
+    
     public int getSolutionCount(){
-	while (solveH(3)){
-	    
-	}
-
-    	return -1;
+	clear();
+	push();
+	if (count == 0)
+	    return -1;
+	return count;
     }
 
 
-    public void clear(){
-	for(int i = 0; i <board.length; i++){
-	    clearRow(i);
-	}
-    }
-    private void clearRow(int row){
-	for(int i = 0; i < board[0].length; i ++){
-	    board[row][i] = true;
+    private void clear(){
+	for(int i = 0; i < queens.length; i++){
+	    queens[i] = 0;
 	}
     }
 
+    private void clearB(){
+	for(int row = 0; row < board.length; row ++){
+	    for(int col = 0; col < board.length; col ++){
+		board[row][col] = true;
+	    }
+	}
+    }
+
+    private void clearR(int row){
+	for(row ++; row < queens.length; row ++){
+	    queens[row] = 0;
+	}
+    }
+
+    private void update(){
+	clearB();
+	for(int i = 0; i < queens.length ; i ++){
+	    board[i][queens[i]] = false;
+	}
+    }
+    
     /**toString
      *and all nunbers that represent queens are replaced with 'Q' 
      *all others are displayed as underscores '_'
      */
+    
     public String toString(){
+	update();
 	String ans = "";
 	for(    int row = 0; row < board.length; row ++){
 	    for(int col = 0; col < board.length; col ++){
 		if (board[row][col]){
 		    ans += " X";
 		}else{
-		    ans += " O";
+		    ans += " Q";
 		}
 	    }
 	    ans += "\n";
@@ -124,8 +129,11 @@ public class QueenBoard{
 	p(i + "");
     }
     public static void main(String[] args){
-	QueenBoard x = new QueenBoard(4);
+	QueenBoard x = new QueenBoard(5);
+	if (args.length != 0)
+	    x = new QueenBoard(Integer.parseInt(args[1]));
 	x.solve();
 	x.p(x.toString());
+	//x.getSolutionCount();
     }
 }
