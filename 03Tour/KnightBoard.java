@@ -22,14 +22,15 @@ public class KnightBoard{
     }
     
     private boolean solveH(int r, int c, int count){
-	
+	return false;
     }
 
     
+
     //2 rows; row 1 -> row coord; row 2 -> col coord
-    public int[][] spots(int r, int c){
-	ArrayList<int> row = new ArrayList<int>();
-	ArrayList<int> col = new ArrayList<int>();
+    public Integer[][] spots(int r, int c){
+	ArrayList<Integer> row = new ArrayList<Integer>();
+	ArrayList<Integer> col = new ArrayList<Integer>();
 	if (check(r + 2, c + 1)){
 	    row.add(r+2);
 	    col.add(c+1);
@@ -66,13 +67,21 @@ public class KnightBoard{
 	    row.add(r-1);
 	    col.add(c-2);
 	}
-	int[][] ans = new int[2][];
+	Integer[][] ans = new Integer[2][];
 	row.trimToSize();
 	col.trimToSize();
-	ans[0]= row.toArray();
-	ans[1]= col.toArray();
+	ans[0]= (Integer[]) row.toArray();
+	ans[1]= (Integer[]) col.toArray();
+	return ans;
     }
     
+    private int[][] intArray(Integer[][] x){
+	int[][] ans = new Int[2][x.[0].length];
+	for (int r = 0; r < x.lenth; r ++){
+	    for (int c = 0; c < x[0].lenth; c ++){
+		int[r][x] = x[r][c].intvalue();
+	}
+    }
     private boolean check(int r, int c){
 	return r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 0
 ;
@@ -110,8 +119,8 @@ public class KnightBoard{
     public static void main(String[] args){
 	KnightBoard x = new KnightBoard(7, 7);
 	if (args.length > 2)
-	    x = new KnightBoard(args[0], args[1]);
-	p(spots(4,4));
+	    x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+	x.p(x.stringify(x.spots(4,4)));
 	
 	
 
