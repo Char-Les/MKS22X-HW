@@ -28,7 +28,7 @@ public class KnightBoard{
     
 
     //2 rows; row 1 -> row coord; row 2 -> col coord
-    public Integer[][] spots(int r, int c){
+    public int[][] spots(int r, int c){
 	ArrayList<Integer> row = new ArrayList<Integer>();
 	ArrayList<Integer> col = new ArrayList<Integer>();
 	if (check(r + 2, c + 1)){
@@ -70,17 +70,20 @@ public class KnightBoard{
 	Integer[][] ans = new Integer[2][];
 	row.trimToSize();
 	col.trimToSize();
-	ans[0]= (Integer[]) row.toArray();
-	ans[1]= (Integer[]) col.toArray();
-	return ans;
+	ans[0]= row.toArray();
+	ans[1]= col.toArray();
+	return intArray(ans);
     }
     
     private int[][] intArray(Integer[][] x){
-	int[][] ans = new Int[2][x.[0].length];
-	for (int r = 0; r < x.lenth; r ++){
-	    for (int c = 0; c < x[0].lenth; c ++){
-		int[r][x] = x[r][c].intvalue();
+	int[][] ans = new int[2][x[0].length];
+	for (int r = 0; r < x.length; r ++){
+	    for (int c = 0; c < x[0].length; c ++){
+		Integer temp = x[r][c];
+		ans[r][c] = temp.intValue();
+	    }
 	}
+	return ans;
     }
     private boolean check(int r, int c){
 	return r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 0
