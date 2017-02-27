@@ -8,20 +8,29 @@ public class KnightBoard{
     }
     
     public void solve(){
-	solveloop(0, 0);
+	solveloop(0,0);
     }
     
     private void solveloop(int r, int c){
 	//clear;
-	if(solveH(r, c, 0)){
+	if(solveH(r, c, 1)){
 	    return;
 	}
+	//reaches end of row
 	if(c == board[0].length - 1)
-	    solveloop(r + 1, 0);
-	solveloop(r, c +1);
+	    solveloop(r + 1, c);
+	if(r < board.length)
+	    solveloop(r, c +1);
+	board = new int[r][c];
     }
     
     private boolean solveH(int r, int c, int count){
+	int[][] places = spots(r,c);
+	for(int i = 0; i < places.length; i ++){
+	    if (solveH(places[0][i], places[1][i], count ++)){
+		return true;
+	    }
+	}
 	return false;
     }
 
@@ -86,8 +95,11 @@ public class KnightBoard{
 	return ans;
     }
     private boolean check(int r, int c){
-	return r >= 0 && r < board.length && c >= 0 && c < board[0].length && board[r][c] == 0
-;
+	//within range
+	return r >= 0 && r < board.length && 
+	       c >= 0 && c < board[0].length && 
+	    //valid spot to move to
+	       board[r][c] == 0;
     } 
 	
     
@@ -123,7 +135,10 @@ public class KnightBoard{
 	KnightBoard x = new KnightBoard(7, 7);
 	if (args.length > 2)
 	    x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-	x.p(x.stringify(x.spots(0,0)));
+	int[][] a = new int[1][3];
+	x.p(x.stringify(a));
+	x.solve();
+	x.p(x.stringify(x));
 	
 	
 
