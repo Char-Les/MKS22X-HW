@@ -67,7 +67,7 @@ public class KnightBoard{
 	    row.add(r-1);
 	    col.add(c-2);
 	}
-	Integer[][] ans = new Integer[2][];
+	Object[][] ans = new Object[2][];
 	row.trimToSize();
 	col.trimToSize();
 	ans[0]= row.toArray();
@@ -75,11 +75,11 @@ public class KnightBoard{
 	return intArray(ans);
     }
     
-    private int[][] intArray(Integer[][] x){
+    private int[][] intArray(Object[][] x){
 	int[][] ans = new int[2][x[0].length];
 	for (int r = 0; r < x.length; r ++){
 	    for (int c = 0; c < x[0].length; c ++){
-		Integer temp = x[r][c];
+		Integer temp = (Integer)x[r][c];
 		ans[r][c] = temp.intValue();
 	    }
 	}
@@ -123,7 +123,7 @@ public class KnightBoard{
 	KnightBoard x = new KnightBoard(7, 7);
 	if (args.length > 2)
 	    x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-	x.p(x.stringify(x.spots(4,4)));
+	x.p(x.stringify(x.spots(0,0)));
 	
 	
 
