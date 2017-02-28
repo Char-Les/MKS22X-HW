@@ -2,35 +2,44 @@ import java.util.*;
 
 public class KnightBoard{
     int[][] board;
+    int countMax;
     
-    public KnightBoard(int r,int c){
+    public KnightBoard(int r,int c)throws Exception{
+	if (r == 0 || c == 0){
+	    throw new Exception("Invalid Dimensions: " + r + " by " + c);
+	}
 	board = new int[r][c];
+	countMax = board.length * board[0].length;
     }
     
     public void solve(){
-	solveloop(0,0);
-    }
-    
-    private void solveloop(int r, int c){
-	//clear;
-	if(solveH(r, c, 1)){
-	    return;
-	}
-	//reaches end of row
-	if(c == board[0].length - 1)
-	    solveloop(r + 1, c);
-	if(r < board.length)
-	    solveloop(r, c +1);
-	board = new int[r][c];
+	if (!solveH(0,0, 1))
+	    p("No Solution");
     }
     
     private boolean solveH(int r, int c, int count){
+	if(count == countMax){
+	    board[r][c] = count;
+	    return true;
+	}
+	//wait(20);
 	int[][] places = spots(r,c);
-	for(int i = 0; i < places.length; i ++){
-	    if (solveH(places[0][i], places[1][i], count ++)){
+	//p(r + "   " + c);
+	int temp = board[r][c];
+	board[r][c] = count;
+	//p(this.toString());
+	//p(stringify(places));
+	if(places[0].length == 0){
+	    board[r][c] = temp;
+	    return false;
+	}
+	for(int i = 0; i < places[0].length; i ++){
+	    //p(count + "   " + places[0].length + "   " + i);
+	    if (solveH(places[0][i], places[1][i], count + 1)){
 		return true;
 	    }
 	}
+	board[r][c] = temp;
 	return false;
     }
 
@@ -130,17 +139,26 @@ public class KnightBoard{
     public void p(int i){
 	p(i + "");
     }
+    private void wait(int millis){ //ADDED SORRY!
+         try {
+             Thread.sleep(millis);
+         }
+         catch (InterruptedException e) {
+         }
+     }
+    
 
     public static void main(String[] args){
-	KnightBoard x = new KnightBoard(7, 7);
-	if (args.length > 2)
-	    x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
-	int[][] a = new int[1][3];
-	x.p(x.stringify(a));
-	x.solve();
-	x.p(x.stringify(x));
-	
-	
+	KnightBoard x;
+	try{
+	    x = new KnightBoard(5, 4);
+	    if (args.length > 1)
+		x = new KnightBoard(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+	    x.solve();
+	    x.p(x.toString());
+	}catch (Exception e){
+	    System.out.println(e.toString());
+	}	
 
     }
 }
