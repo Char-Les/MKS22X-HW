@@ -7,7 +7,7 @@ public class QueenBoard{
 
     public QueenBoard(int size){
 	//initializes all the variables
-        count = 0;
+        count = -1;
 	//used to help print the board
 	board = new boolean[size][size];
 	//used to keep track of queens (only one queen per row so this notation works)
@@ -98,14 +98,12 @@ public class QueenBoard{
     //just calls the above helper function
     public void countSolutions(){
 	clear();
+	count = 0;
 	solveH2(0);
     }
     
     public int getSolutionCount(){
-	//count initialized as 0 (easier counting for solveH2)
-	if (count == 0)
-	    return -1;
-	return count;
+        return count;
     }
 
     //clears queens (don't think I used it)

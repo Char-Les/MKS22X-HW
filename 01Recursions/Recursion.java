@@ -21,6 +21,9 @@ public class Recursion{
 
     //checks if two floats are close (a certain % of each other either way)
     public static boolean close(double a, double b){
+	//if a or b is 0 then close2 can only return false
+	if (a == 0.0)             return b < 0.00000000000000000000000000001;
+	if (b == 0.0)             return a < 0.00000000000000000000000000001;
 	return close2(a,b) || close2(b,a);
     }
 
@@ -47,10 +50,11 @@ public class Recursion{
     
     public static void main(String[] args){
 	p(name());
-	p(sqrt(25));
-	p(sqrt(2.2));
-	p(sqrt(100.123124513524352));
-	p(sqrt(625 + 123819));
+	p("" + close(0, 0.00000001));
+	//p(sqrt(0.0));
+	p(sqrt(2.0));
+	p(sqrt(100.0));
+	p(sqrt(4.0));
 	p(sqrt(-25));
 	
     }
