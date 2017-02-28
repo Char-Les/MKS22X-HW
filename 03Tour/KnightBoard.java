@@ -1,44 +1,54 @@
 import java.util.*;
 
 public class KnightBoard{
+    //keeps track of board
     int[][] board;
+    //max count should go up to
     int countMax;
     
     public KnightBoard(int r,int c)throws Exception{
+	//stops invalid boards
 	if (r == 0 || c == 0){
 	    throw new Exception("Invalid Dimensions: " + r + " by " + c);
 	}
+	//initializes board
 	board = new int[r][c];
+	//finds the max count
 	countMax = board.length * board[0].length;
     }
-    
+
+    //main solve method
     public void solve(){
+	//runs the helper
+	//if not true then there are no solutions starting at the corner (K said we don't need to worry about other starting positions)
 	if (!solveH(0,0, 1))
 	    p("No Solution");
     }
-    
+
+    //recursive function for solving the tour
     private boolean solveH(int r, int c, int count){
+	//if you reach the max count you're done
 	if(count == countMax){
+	    //still haven't filled out the last square though
 	    board[r][c] = count;
 	    return true;
 	}
-	//wait(20);
+	//2D array of the valid spots returns a int[2][] where the first row is the y cor and the second row is x cor
 	int[][] places = spots(r,c);
-	//p(r + "   " + c);
+	//if there are no valid spots then this route fails
+	if(places[0].length == 0)
+	    return false;
+	//keeps track of the counting in case this route fails
 	int temp = board[r][c];
 	board[r][c] = count;
-	//p(this.toString());
-	//p(stringify(places));
-	if(places[0].length == 0){
-	    board[r][c] = temp;
-	    return false;
-	}
+	//loops through possible further moves
 	for(int i = 0; i < places[0].length; i ++){
-	    //p(count + "   " + places[0].length + "   " + i);
+	    //if the spot returns true, you're done; else you keep going
 	    if (solveH(places[0][i], places[1][i], count + 1)){
 		return true;
 	    }
 	}
+	//none of the routes from this spot are valid -> go back
 	board[r][c] = temp;
 	return false;
     }
@@ -47,6 +57,7 @@ public class KnightBoard{
 
     //2 rows; row 1 -> row coord; row 2 -> col coord
     public int[][] spots(int r, int c){
+	//checks in the 8 directions whether or not its a valid move
 	ArrayList<Integer> row = new ArrayList<Integer>();
 	ArrayList<Integer> col = new ArrayList<Integer>();
 	if (check(r + 2, c + 1)){
@@ -86,13 +97,16 @@ public class KnightBoard{
 	    col.add(c-2);
 	}
 	Object[][] ans = new Object[2][];
+	//removes excess spots in the array
 	row.trimToSize();
 	col.trimToSize();
 	ans[0]= row.toArray();
 	ans[1]= col.toArray();
+	//returns the 2D array
 	return intArray(ans);
     }
-    
+
+    //converts the Object Array from ArrayList's toString to a int[][] (shouldn't ever be a casting error)
     private int[][] intArray(Object[][] x){
 	int[][] ans = new int[2][x[0].length];
 	for (int r = 0; r < x.length; r ++){
@@ -103,6 +117,8 @@ public class KnightBoard{
 	}
 	return ans;
     }
+
+    //helper for spots(int,int) for checking possible spots
     private boolean check(int r, int c){
 	//within range
 	return r >= 0 && r < board.length && 
@@ -111,12 +127,13 @@ public class KnightBoard{
 	       board[r][c] == 0;
     } 
 	
-    
+    //prints out the board
     //blank if you never called solve or when there is no solution
     public String toString(){
 	return stringify(board);
     }
 
+    //retursn the string version of a 2D array
     public String stringify(int[][] x){
 	String ans = "";
 	for(    int row = 0; row < x.length; row ++){
@@ -139,14 +156,15 @@ public class KnightBoard{
     public void p(int i){
 	p(i + "");
     }
-    private void wait(int millis){ //ADDED SORRY!
+    
+    private void wait(int millis){
          try {
              Thread.sleep(millis);
          }
          catch (InterruptedException e) {
          }
      }
-    
+
 
     public static void main(String[] args){
 	KnightBoard x;
