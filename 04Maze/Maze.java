@@ -18,6 +18,13 @@ public class Maze{
     */
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
+	animate = false;
+	File x = new File(filename);
+	Scanner file =  new Scanner(x);
+	while (file.hasNext()){
+	    String nextChar = file.next();
+	    
+	}
     }
     
     private void wait(int millis){ //ADDED SORRY!
@@ -70,5 +77,13 @@ public class Maze{
         //COMPLETE SOLVE
         return false; //so it compiles
     }
+    
 
+    public void p(String s){
+	System.out.println(s);
+    }
+    public void p(int i){
+	p(i + "");
+    }
+    
 }
