@@ -1,3 +1,6 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import java.util.*;
 import java.io.*;
 
@@ -11,16 +14,15 @@ public class Driver{
     }
     
     
-    public static void main(String[]args){
-	try{
-	    File x = new File("data1.dat");
-	    Scanner file =  new Scanner(x);
-	    while (file.hasNext()){
-		String next = file.next();
-		p(next);
-	    }
-	}catch (IOException e){
+    public static void main(String[]args) throws FileNotFoundException {
+	
+	File x = new File("data1.dat");
+	Scanner file =  new Scanner(x);
+	while (file.hasNext()){
+	    String next = file.next();
+	    p(next);
 	}
+	
 	
         Maze f;
         //f = new Maze("data1.dat");//true animates the maze.
