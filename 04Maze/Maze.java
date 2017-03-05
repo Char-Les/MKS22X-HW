@@ -19,11 +19,28 @@ public class Maze{
     public Maze(String filename){
         //COMPLETE CONSTRUCTOR
 	animate = false;
-	File x = new File(filename);
-	Scanner file =  new Scanner(x);
-	while (file.hasNext()){
-	    String nextChar = file.next();
-	    
+	try{
+	    getMaze(filename);
+	}catch (FileNotFoundException e){
+	    throw new FileNotFoundException(": " + filename);
+	}
+	if (!isMaze()){
+	    throw new Exception("Is not a Maze");
+	}
+    }
+
+    public void getMaze(String file)throws FileNotFoundException{
+	File x = new File("data1.dat");
+	Scanner lines = new Scanner(x);
+	int r = 0;
+	while (lines.hasNext()){
+	    lines.nextLine().toCharArray();
+	    r ++;
+	}
+	maze = new char[r][];
+	Scanner lines2 = new Scanner(x);
+	for (int i = 0; i < r; i ++){
+	    maze[i] = lines2.nextLine().toCharArray();
 	}
     }
     
@@ -33,7 +50,7 @@ public class Maze{
          }
          catch (InterruptedException e) {
          }
-     }
+    }
 
     public void setAnimate(boolean b){
         animate = b;
@@ -79,6 +96,11 @@ public class Maze{
     }
     
 
+    public void printMaze(){
+	clearTerminal();
+	toString();
+	wait(25);
+    }
     public void p(String s){
 	System.out.println(s);
     }
