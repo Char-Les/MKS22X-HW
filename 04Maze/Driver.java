@@ -26,7 +26,7 @@ public class Driver{
 	if (args.length > 0){
 	    a = new Maze(args[0]);
 	}
-	a.setAnimate(true);
+	a.setAnimate(false);
 	p(a.solve() + "");
     }
 }
