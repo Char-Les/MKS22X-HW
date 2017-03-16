@@ -2,9 +2,12 @@ import java.util.*;
 
 public class Part{
 
-    public static int part(int[] data, int start, int end){
-	//if end and start are too close then... well... you're done
-	if(end - start <= 1) return start;
+    public static int part(int[] data, int start, int end) throws IllegalArgumentException{
+	//if length is 0, it's bad data
+	if(data.length == 0) throw new IllegalArgumentException("empty array");
+
+	//if end and start are the same, then you're done
+	if(end == start) return start;
 	
 	//chooses random pivot
 	Random x = new Random();

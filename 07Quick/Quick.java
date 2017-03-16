@@ -1,11 +1,16 @@
+import java.io.*;
+
+
 public class Quick{
     
-    private static int part(int[] ary, int start, int end){
+    private static int part(int[] ary, int start, int end)throws IllegalArgumentException{
 	return Part.part(ary, start, end);
     }
     
 
-    public static int select(int[] ary, int k){
+    public static int select(int[] ary, int k) throws IllegalArgumentException{
+	if (k >= ary.length)
+	    throw new IllegalArgumentException("" + k);
 	return helper(ary, 0, ary.length - 1, k);
     }
 
@@ -26,12 +31,9 @@ public class Quick{
 
 
     public static void main(String[] args){
-	int[]ary = { 2, 10, 15, 23, 0,  5};
+	int[]ary = {23, 0};
 	p(select( ary , 0 ));
 	p(select( ary , 1 ));
-	p(select( ary , 2 ));
-	p(select( ary , 3 ));
-	p(select( ary , 4 ));
-	p(select( ary , 5 ));
+
     }
 }
