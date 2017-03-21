@@ -43,12 +43,24 @@ public class Part{
 	return pivot;
     }
 
-    //swaos data[x] and data[y]
+    //swaps data[x] and data[y]
     private static void swap(int[] data, int x, int y){
 	int temp = data[x];
 	data[x] = data[y];
 	data[y] = temp;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //clusters the same values
@@ -63,6 +75,7 @@ public class Part{
 	//chooses random pivot
 	Random x = new Random();
 	int pivot = x.nextInt(end - start + 1) + start;
+	pivot = 3;
 	//move pivot out of way
 	swap(data, pivot, start);
 	pivot = start;
@@ -75,7 +88,7 @@ public class Part{
 	int wallEnd = end;
 
 
-
+	p(data);
 	//put the wall in the right place
 	int check = data[start];
 	for(int i = start + 1; i < end + 1; i ++){
@@ -85,7 +98,9 @@ public class Part{
 	    }else if(data[i] > check){
 		swap(data, i, wallEnd);
 		wallEnd --;
+		i--;
 	    }
+	    p(data);
 	}
 	
 
@@ -115,18 +130,22 @@ public class Part{
     public static void p(int[] x){
 	String ans = "";
 	for(int i = 0; i < x.length; i ++){
-	    p(x[i]);
+	    ans += x[i] + " ";
 	}
+	p(ans);
     }
 
     public static void p(int x){
-	System.out.println(x);
+	p(x + "");
     }
     
+    public static void p(String x){
+	System.out.println(x);
+    }
     public static void main(String[] args){
-	int[] x = {5, 3, 2, 1, 4};
+	int[] x = {5, 2, 1, 4, 3};
 	p(x.length);
-	p(partC(x, 0, x.length - 1));
+	p(partC(x, 0, x.length -1));
 	p(x);
 
     }
