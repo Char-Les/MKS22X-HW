@@ -8,7 +8,7 @@ public class Quick{
     }
     
 
-    public static int select(int[] ary, int k) throws IllegalArgumentException{
+    public static int quickselect(int[] ary, int k) throws IllegalArgumentException{
 	if (k >= ary.length)
 	    throw new IllegalArgumentException("" + k);
 	return helper(ary, 0, ary.length - 1, k);
@@ -25,6 +25,14 @@ public class Quick{
 	}
     }
     
+
+    public static int quicksort(int[] ary) throws IllegalArgumentException{
+    }
+
+
+
+
+
     public static void p(int x){
 	System.out.println(x);
     }
@@ -32,8 +40,8 @@ public class Quick{
 
     public static void main(String[] args){
 	int[]ary = {23, 0};
-	p(select( ary , 0 ));
-	p(select( ary , 1 ));
+	p(quickselect( ary , 0 ));
+	p(quickselect( ary , 1 ));
 
     }
 }

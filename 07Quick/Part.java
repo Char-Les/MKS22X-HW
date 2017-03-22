@@ -75,7 +75,7 @@ public class Part{
 	//chooses random pivot
 	Random x = new Random();
 	int pivot = x.nextInt(end - start + 1) + start;
-	pivot = 3;
+	//pivot = 3; //debugging specific cases
 	//move pivot out of way
 	swap(data, pivot, start);
 	pivot = start;
@@ -87,20 +87,21 @@ public class Part{
 	int wall = start;
 	int wallEnd = end;
 
-
-	p(data);
+	//p(data);
+	//p("  ");
 	//put the wall in the right place
 	int check = data[start];
-	for(int i = start + 1; i < end + 1; i ++){
+	int i = start + 1;
+	while(i <= wallEnd){
 	    if (data[i] < check){
 		wall ++;
 		swap(data, i, wall);
+		i++;
 	    }else if(data[i] > check){
 		swap(data, i, wallEnd);
 		wallEnd --;
-		i--;
 	    }
-	    p(data);
+	    //p(data);
 	}
 	
 
