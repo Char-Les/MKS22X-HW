@@ -3,6 +3,7 @@ import java.util.*;
 public class Part{
 
     public static int part(int[] data, int start, int end) throws IllegalArgumentException{
+
 	//if length is 0, it's bad data
 	if(data.length == 0) throw new IllegalArgumentException("empty array");
 
@@ -63,6 +64,23 @@ public class Part{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     //clusters the same values
     public static int[] partC(int[] data, int start, int end) throws IllegalArgumentException{
 	//if length is 0, it's bad data
@@ -74,6 +92,7 @@ public class Part{
 	
 	//chooses random pivot
 	Random x = new Random();
+	//p(end + "   "  + start);
 	int pivot = x.nextInt(end - start + 1) + start;
 	//pivot = 3; //debugging specific cases
 	//move pivot out of way
@@ -96,12 +115,13 @@ public class Part{
 	    if (data[i] < check){
 		wall ++;
 		swap(data, i, wall);
-		i++;
 	    }else if(data[i] > check){
 		swap(data, i, wallEnd);
 		wallEnd --;
+		i --;
 	    }
-	    //p(data);
+	    i ++;
+	    //p(i);
 	}
 	
 
@@ -149,5 +169,11 @@ public class Part{
 	p(partC(x, 0, x.length -1));
 	p(x);
 
+	p("\n\n\n");
+	int[] ary = new int[10000];
+	for (int i = 0; i < ary.length; i ++){
+	    ary[i] = 10000 - i;
+	}
+	p(partC(ary, 0, ary.length - 1));
     }
 }
