@@ -12,7 +12,7 @@ public class Quick{
     public static int quickselect(int[] ary, int k) throws IllegalArgumentException{
 	//bad case 1
 	if (k >= ary.length)
-	    throw new IllegalArgumentException("" + k);
+	    throw new IllegalArgumentException(" k is: " + k + ", when array length is: "  + ary.length);
 	return helper(ary, 0, ary.length - 1, k);
     }
 
@@ -40,6 +40,8 @@ public class Quick{
     }
     
     public static void quicksort(int[] ary) throws IllegalArgumentException{
+	//an empty array is sorted and not a bad case
+	if (ary.length == 0) return;
 	quickH(ary, 0, ary.length - 1);
     }
 
@@ -78,18 +80,18 @@ public class Quick{
 
     public static void check(int[] ary){
 	for (int i = 0; i + 1 < ary.length; i ++){
-	    if(ary[i] >= ary[i + 1])
+	    if(ary[i] > ary[i + 1])
 		p(i + " " + ary[i] + " " + ary[i + 1] + " " );
 	}
     }
     public static void main(String[] args){
-	int[] ary = new int[10000];
+	int[] ary = new int[00000];
 	for (int i = 0; i < ary.length; i ++){
-	    ary[i] = 10000 - i;
+	    ary[i] = (int)(Math.random() * 5);
 	}
 	p(2342343);
-	p(quickselect( ary , 0 ));
-	p(quickselect( ary , 1 ));
+	//p(quickselect( ary , 0 ));
+	//p(quickselect( ary , 1 ));
 
 	quicksort(ary);
 	check(ary);
