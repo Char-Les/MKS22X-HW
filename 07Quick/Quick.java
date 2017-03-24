@@ -1,12 +1,8 @@
 import java.io.*;
 
+//Part contains the partition function (part(...))and the dutch flag thing (partC(...))
+public class Quick extends Part{
 
-public class Quick{
-
-    //same function from other file
-    private static int part(int[] ary, int start, int end)throws IllegalArgumentException{
-	return Part.part(ary, start, end);
-    }
     
     //get kth smallest number (0 indexing)
     public static int quickselect(int[] ary, int k) throws IllegalArgumentException{
@@ -33,11 +29,6 @@ public class Quick{
 	}
     }
     
-
-    //same function from other file
-    private static int[] partC(int[] ary, int start, int end)throws IllegalArgumentException{
-	return Part.partC(ary, start, end);
-    }
     
     public static void quicksort(int[] ary) throws IllegalArgumentException{
 	//an empty array is sorted and not a bad case
@@ -67,15 +58,7 @@ public class Quick{
    
 
 
-    public static void p(int x){
-	Part.p(x);
-    }
-    public static void p(int[] x){
-	Part.p(x);
-    }
-    public static void p(String x){
-	Part.p(x);
-    }
+
 
 
     public static void check(int[] ary){
