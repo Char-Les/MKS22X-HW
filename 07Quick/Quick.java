@@ -59,8 +59,8 @@ public class Quick extends Part{
 
 
 
-
-
+    
+      //makes sure all the elements are in order and prints out the ones that aren't
     public static void check(int[] ary){
 	for (int i = 0; i + 1 < ary.length; i ++){
 	    if(ary[i] > ary[i + 1])
@@ -68,9 +68,14 @@ public class Quick extends Part{
 	}
     }
     public static void main(String[] args){
-	int[] ary = new int[00000];
+	int[] ary = new int[10000000];
 	for (int i = 0; i < ary.length; i ++){
+	    ary[i] = 0;
 	    ary[i] = (int)(Math.random() * 5);
+	    ary[i] = i;
+	    ary[i] = ary.length - i;
+	    ary[i] = (int)(Math.random() * ary.length);
+	    
 	}
 	p(2342343);
 	//p(quickselect( ary , 0 ));
