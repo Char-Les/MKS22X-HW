@@ -1,22 +1,36 @@
 public class MyLinkedList{
-    LNode start, end;
+    Node start, end;
     int size;
     
-    private class LNode{
+    private class Node{
 	int value;
-	LNode head, tail;
+	Node head, tail;
 
-	public LNode(int x, LNode next, LNode pre){
+	public Node(int x, Node next, Node pre){
 	    value = x;
 	    head = next;
 	    tail = pre;
 	}
 
-	public LNode(int x){
+	public Node(int x){
 	    value = x;
 	    head = null;
-	    tail = null
+	    tail = null;
 	}
+	
+	public String toString(){
+	    String ans = "";
+	    ans += helper(tail) + helper(this) + helper (head);
+	    return ans;
+	}
+
+	private String helper(Node x){
+	    if(x == null){
+		return " (null)";
+	    }else{
+		return " (" + x.value + ")";
+	    }
+	} 
     }
 
     public MyLinkedList(){
@@ -46,13 +60,14 @@ public class MyLinkedList{
 	end.head = x;
 	x.tail = end;
 	end = x;
+	size ++;
 	return true;
     }
 
     //add after the index you give
     //0 <= index < size
     public boolean add(int index, int value){
-	Node x = getNode(x);
+	Node x = getNode(index);
 	return add(x, value);
     }
 
@@ -62,7 +77,7 @@ public class MyLinkedList{
 	if (x == end){
 	    x.head = a;
 	    end = x;
-	    return true;;
+	    return true;
 	}
 
 	x.head.tail = a;
@@ -78,7 +93,7 @@ public class MyLinkedList{
     }//wow so coooooll
 
     //gets to a certain node index
-    private node getNode(int index){
+    private Node getNode(int index){
 	//this is private so the case where index is greater than size is the program's fault
 	Node ans = start;
 	for(;index > 0; index --){
@@ -114,9 +129,38 @@ public class MyLinkedList{
     }
     
 
-
+    
     public String toString(){
-	
+	String ans = "";
+	Node check = start;
+	ans += "size: " + size + "\n";
+	ans += "{" + check.value;
+	for(int i = 1; i < size; i ++){
+	    check = check.head;
+	    ans += ", " + check.value;
+	}
+	ans += "}";
+	return ans;
     }
     
+
+    private static void p(String x){
+	System.out.println(x);
+    }
+    private static void p(MyLinkedList x){
+	p(x.toString());
+    }
+    private static void p(int x){
+	p(x +"");
+    }
+    public static void main(String[] x123){
+	MyLinkedList x = new MyLinkedList();
+	int[] a = {1,2};
+	for(int b : a){
+	    p(b);
+	    x.add(b);
+	}
+
+	p(x);
+    }
 }
