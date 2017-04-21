@@ -56,7 +56,7 @@ public class MyLinkedList implements Iterable<Integer>{
 	public Integer next(){
 	    if(hasNext()){
 		x = x.head;
-		return new Integer(x.value);
+		return x.value;
 	    }else{
 		throw new NoSuchElementException();
 	    }
