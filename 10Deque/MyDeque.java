@@ -19,6 +19,8 @@ public class MyDeque{
 	    throw new NullPointerException("addFirst");
 	if(size == 0){
 	    size ++;
+       start = 0;
+       end = 0;
 	    deck[start] = x;
 	    return;
 	}
@@ -36,6 +38,8 @@ public class MyDeque{
 	    throw new NullPointerException("addFirst");
 	if(size == 0){
 	    size ++;
+       start = 0;
+       end = 0;
 	    deck[start] = x;
 	    return;
 	}
