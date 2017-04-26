@@ -11,40 +11,33 @@ public class StackCalc{
     }
     
     private static void check(String x, Deque<Double> pile){
-	switch (x){
-	case "+":
-	    double a = pile.removeLast();
-	    double b = pile.removeLast();
-	    pile.add(b + a);
-	    break;
-
-	case "-":
-	    double c = pile.removeLast();
-	    double d = pile.removeLast();
-	    pile.add(d - c);
-	    break;
-
-	case "*":
-	    double e = pile.removeLast();
-	    double f = pile.removeLast();
-	    pile.add(f * e);
-	    break;
-	    
-	case "/":
-	    double g = pile.removeLast();
-	    double h = pile.removeLast();
-	    pile.add(h / g);
-	    break;
-
-	case "%":
-	    double i = pile.removeLast();
-	    double j = pile.removeLast();
-	    pile.add(j % i);
-	    break;
-	 
-	default:
+	try{
 	    Double y = new Double(x);
 	    pile.add(y);
+	}catch (NumberFormatException e){
+	    double a = pile.removeLast();
+	    double b = pile.removeLast();
+	    switch (x){
+	    case "+":
+		pile.add(b + a);
+		break;
+		
+	    case "-":
+	        pile.add(b - a);
+		break;
+		
+	    case "*":
+		pile.add(b * a);
+		break;
+		
+	    case "/":
+		pile.add(b / a);
+		break;
+		
+	    case "%":
+		pile.add(b % a);
+		break;
+	    }	
 	}
     }
 }
