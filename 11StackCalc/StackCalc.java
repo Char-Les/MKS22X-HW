@@ -6,7 +6,6 @@ public class StackCalc{
 	ArrayDeque<Double> pile = new ArrayDeque<Double>();
 	for(int i = 0; i < x.length; i ++){
 	    check(x[i], pile);
-	    System.out.println(pile.getLast());
 	}
 	return pile.pop();
     }
