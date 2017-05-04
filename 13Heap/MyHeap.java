@@ -22,14 +22,17 @@ public class MyHeap{
 
     public void add(String x){}
     
-    private void pushDown(int index){
+    private void pushDown(int 
+index){
 	//you're at the bottom of the heap
-	if (index * 2 + 1 > heap.size())
+	if (index * 2 >= heap.size())
 	    return;
 	
-	int
-	//
-	
+	int c1 = index * 2;
+   int c2 = c1 + 1;
+
+	//try two child catch one
+   try{}
     }
     private void pushUp(int index){
 	//you're at top
