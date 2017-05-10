@@ -148,7 +148,8 @@ index){
 	x.add("d");
 	x.add("d");
 	p(x);
-	p(x.remove());
+	for(int i = 0; i < 16; i ++)
+	    p(x.remove());
 	p(x);
     }
 }
