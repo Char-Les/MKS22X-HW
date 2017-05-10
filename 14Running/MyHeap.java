@@ -3,24 +3,24 @@ import java.util.*;
 
 
 public class MyHeap{
-    ArrayList<String> heap;
+    ArrayList<Integer> heap;
     boolean max = true;
 
 
     
     public MyHeap(boolean a){
-	heap = new ArrayList<String>();
+	heap = new ArrayList<Integer>();
 	max = false;
-	heap.add("");
+	heap.add(0);
     }
     public MyHeap(){
-	heap = new ArrayList<String>();
-	heap.add("");
+	heap = new ArrayList<Integer>();
+	heap.add(0);
     }
 
 
     //adds to the end of the list and semi sorts it
-    public void add(String x){
+    public void add(Integer x){
 	heap.add(x);
 	pushUp(heap.size() - 1);
     }
@@ -99,7 +99,7 @@ public class MyHeap{
     }
     //switch two indexs in the heap
     private void swap(int index, int index2){
-	String temp = heap.get(index2);
+	Integer temp = heap.get(index2);
 	heap.set(index2, heap.get(index));
 	heap.set(index, temp);
     }
@@ -126,28 +126,28 @@ public class MyHeap{
     }
 
 
-    public String remove(){
+    public Integer remove(){
 	//if there is only 1 element then remove will crash
 	if(heap.size() == 2) 
 	    return heap.remove(1);
 	
 	//get the last element and the top; organize the array having the top as the last element
-	String x = heap.remove(heap.size() - 1);
-	String ans = peak(); 
+	Integer x = heap.remove(heap.size() - 1);
+	Integer ans = peak(); 
 	heap.set(1, x);
 	
 	//'sort' the heap
 	pushDown(1);
 	return ans;
     }
-    public String peak(){
+    public Integer peak(){
 	return heap.get(1);
     }
     
 
 
 
-    public String toString(){
+    public String toInteger(){
 	String ans = "";
 	for (int i = 1; i < heap.size(); i++){
 	    if(i == 2)
@@ -164,7 +164,7 @@ public class MyHeap{
     }
 
     private static void p(MyHeap x){
-	p(x.toString());
+	p(x.toInteger());
     }
     private static void p(int x){
 	p(x + "");
@@ -176,39 +176,6 @@ public class MyHeap{
     public static void main(String[] ar){
 	MyHeap x = new MyHeap(false);
 	p(x);
-	x.add("a");
-	x.add("b");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("a");
-	x.add("b");
-	x.add("c");
-	x.add("a");
-	x.add("b");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("c");
-	x.add("d");
-	x.add("a");
-	x.add("b");
-	x.add("c");
-	p(x);
-	for(int i = 0; i < 16; i ++)
-	    p(x.remove());
 	p(x);
     }
 }
