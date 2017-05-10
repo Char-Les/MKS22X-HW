@@ -6,7 +6,6 @@ public class MyHeap{
     ArrayList<Integer> heap;
     boolean max = true;
 
-
     
     public MyHeap(boolean a){
 	heap = new ArrayList<Integer>();
@@ -18,7 +17,10 @@ public class MyHeap{
 	heap.add(0);
     }
 
-
+    public int size(){
+	return heap.size() - 1;
+    }
+    
     //adds to the end of the list and semi sorts it
     public void add(Integer x){
 	heap.add(x);
@@ -128,7 +130,7 @@ public class MyHeap{
 
     public Integer remove(){
 	//if there is only 1 element then remove will crash
-	if(heap.size() == 2) 
+	if(heap.size() == 2)
 	    return heap.remove(1);
 	
 	//get the last element and the top; organize the array having the top as the last element
@@ -147,7 +149,7 @@ public class MyHeap{
 
 
 
-    public String toInteger(){
+    public String toString(){
 	String ans = "";
 	for (int i = 1; i < heap.size(); i++){
 	    if(i == 2)
@@ -164,7 +166,7 @@ public class MyHeap{
     }
 
     private static void p(MyHeap x){
-	p(x.toInteger());
+	p(x.toString());
     }
     private static void p(int x){
 	p(x + "");
@@ -174,8 +176,17 @@ public class MyHeap{
     }
     
     public static void main(String[] ar){
-	MyHeap x = new MyHeap(false);
-	p(x);
+	MyHeap x = new MyHeap(true);
+	p(x);	x.add(1);
+	x.add(12);
+	x.add(1);
+	x.add(12);
+	x.add(1);
+	x.add(12);
+	x.add(1);
+	x.add(12);
+	x.add(1);
+	x.add(12);
 	p(x);
     }
 }
