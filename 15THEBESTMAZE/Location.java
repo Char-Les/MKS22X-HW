@@ -4,16 +4,11 @@ public class Location implements Comparable<Location>{
     int row, col;
     Location prev;
 
-    public Loaction(int r, int c, Location p, int goalD, int startD){
-	this.goalD = goalD;
-	this.startD = startD;
-	row = r;
-	col = c; 
-	prev = p;
-	star = false;
+    public Location(int r, int c, Location p, int goalD, int startD){
+        this(r, c, p, goalD, startD, false);
     }
 
-    public Loaction(int r, int c, Location p, int goalD, int startD, boolean s){
+    public Location(int r, int c, Location p, int goalD, int startD, boolean s){
 	this.goalD = goalD;
 	this.startD = startD;
 	row = r;
@@ -28,10 +23,8 @@ public class Location implements Comparable<Location>{
     
     public int compareTo(Location x){
 	if(star){
-	    if()
-	    return 1;
+	    return this.sumD() - x.sumD();
 	}
-	
-	return -1;
+	return this.goalD - x.goalD;
     }
 }
