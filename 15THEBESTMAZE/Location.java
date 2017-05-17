@@ -4,6 +4,9 @@ public class Location implements Comparable<Location>{
     int row, col;
     Location prev;
 
+    public Location(int r, int c){
+	this(r, c, null, 0, 0, false);
+    }
     public Location(int r, int c, Location p, int goalD, int startD){
         this(r, c, p, goalD, startD, false);
     }
