@@ -9,9 +9,8 @@ public class MyHeap{
 
     
     public MyHeap(boolean a){
-	heap = new ArrayList<String>();
-	max = false;
-	heap.add("");
+	MyHeap();
+	max = a;
     }
     public MyHeap(){
 	heap = new ArrayList<String>();
