@@ -1,20 +1,21 @@
 import java.util.*;
 
-public class MyHeap<E>{
+public class MyHeap<E extends Comparable<E>>{
     ArrayList<E> heap;
     boolean max = true;
 
-    
-    public MyHeap<E>(boolean a){
-	MyHeap();
-	max = a;
-    }
-    public MyHeap<E>(){
+    public MyHeap(){
 	heap = new ArrayList<E>();
 	heap.add(null);
     }
    
+    public MyHeap(boolean x){
+	heap = new ArrayList<E>();
+	heap.add(null);
+	max = x;
+    }
 
+    
 
     public void add(E x){
 	heap.add(x);
@@ -95,7 +96,7 @@ public class MyHeap<E>{
     }
     //switch two indexs in the heap
     private void swap(int index, int index2){
-	String temp = heap.get(index2);
+	E temp = heap.get(index2);
 	heap.set(index2, heap.get(index));
 	heap.set(index, temp);
     }
@@ -156,4 +157,12 @@ public class MyHeap<E>{
 	return ans;
     }
 
+
+    public static void main(String[] arg){
+	MyHeap<Integer> x = new MyHeap<Integer>();
+	x.add(9);
+	x.add(1);
+	x.add(7);
+	System.out.println(x);
+    }
 }

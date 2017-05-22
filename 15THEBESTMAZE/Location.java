@@ -30,4 +30,8 @@ public class Location implements Comparable<Location>{
 	}
 	return this.goalD - x.goalD;
     }
+    public String toString(){
+	return "(" + sumD()+ ")";
+	    
+    }
 }

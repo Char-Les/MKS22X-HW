@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -76,8 +77,9 @@ public class Maze{
 	maxRows = maze.length;
 	maxCols = maze[0].length;
 	
-	start = new Location(startr, startc);
-	end = new Location(endr, end c)
+	end = new Location(endr, endc, null, 0, 0, false);
+	int d = Math.abs(endr - startr) + Math.abs(startc - endc);
+	start = new Location(startr, startc, null, 0, d, false);
 	
     }
 
@@ -100,10 +102,11 @@ public class Maze{
 	    int col = i%maxc;
 
 	    char c =  maze[row][col];
-	    ans+=c;
+	    ans += c;
 	    if( col == maxc-1 ){
 		ans += "\n";
-	    }}
+	    }
+	}
 	return ans + "\n";
     }
 
