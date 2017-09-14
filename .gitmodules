@@ -1,0 +1,3 @@
+[submodule "asteroids"]
+	path = asteroids
+	url = git@github.com:mcheng3/asteroids.git
